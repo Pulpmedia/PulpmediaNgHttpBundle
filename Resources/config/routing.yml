@@ -1,0 +1,3 @@
+pulpmedia_ng_http_homepage:
+    path:     /
+    defaults: { _controller: PulpmediaNgHttpBundle:Default:index }

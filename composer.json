@@ -24,6 +24,11 @@
                 "Pulpmedia\\NgHttpBundle" : ""
             }
         },
+        "require" : {
+            "jms/serializer": "^1.1",
+            "jms/serializer-bundle": "^1.1",
+            "dunglas/angular-csrf-bundle": "^1.0"
+        }
         "target-dir" : "Pulpmedia/NgHttpBundle",
         "repositories" : [{
             }],

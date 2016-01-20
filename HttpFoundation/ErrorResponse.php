@@ -19,16 +19,10 @@ class ErrorResponse extends BaseResponse{
         $this->createContent();
     }
 
-    public function setContent($data){
-        $this->data = $data;
-        $this->createContent();
-    }
-
     private function createContent(){
         $content = array(
                 'errorCode' => $this->errorCode,
-                'errors'    => $this->errors,
-                'data'      => $this->data
+                'errors'    => $this->errors
         );
         parent::setContent($content);
     }

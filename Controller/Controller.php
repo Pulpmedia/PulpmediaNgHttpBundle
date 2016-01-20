@@ -22,7 +22,6 @@ class Controller extends Controller
         $response = $this->get('pulpmedia_ng_http.response.factory')->getErrorResponse();
         $response->setErrorCode($errorCode);
         $response->setErrors($errors);
-        $response->setContent($data);
         $response->setStatusCode($status);
 
         return $response;

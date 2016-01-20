@@ -4,7 +4,7 @@ namespace Pulpmedia\NgHttpBundle\Services;
 
 use JMS\Serializer\Serializer;
 
-use Pulpmedia\NgHttpBundle\HttpFoundation\JsonResponse;
+use Pulpmedia\NgHttpBundle\HttpFoundation\BaseResponse;
 use Pulpmedia\NgHttpBundle\HttpFoundation\ErrorResponse;
 use Pulpmedia\NgHttpBundle\HttpFoundation\SuccessResponse;
 
@@ -17,7 +17,7 @@ class ResponseFactory{
     }
 
     public function getResponse(){
-        $response = new JsonResponse($this->serializer);
+        $response = new BaseResponse($this->serializer);
         return $response;
     }
 

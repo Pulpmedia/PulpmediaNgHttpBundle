@@ -28,7 +28,7 @@ class Controller extends Controller
     }
 
     protected function serializeFormErrors($form, $flat_array = false, $add_form_name = false, $glue_keys = '_'){
-        $errors = $this->get('pulpmedia_ng_http.form.errors_serializer')->serializeFormErrors($form, $flat_array, $add_form_name, $glue_keys)
+        $errors = $this->get('pulpmedia_ng_http.form.errors_serializer')->serializeFormErrors($form, $flat_array, $add_form_name, $glue_keys);
     }
 
 }

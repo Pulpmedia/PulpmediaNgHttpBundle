@@ -1,4 +1,9 @@
 services:
-#    pulpmedia_ng_http.example:
-#        class: Pulpmedia\NgHttpBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+   pulpmedia_ng_http.response.factory:
+       class: Pulpmedia\NgHttpBundle\Services\ResponseFactory
+       arguments: ["@jms_serializer"]
+   pulpmedia_ng_http.form.type.entity_hidden:
+       class: Pulpmedia\NgHttpBundle\Form\Type\EntityHiddenType
+       arguments: ["@doctrine.orm.entity_manager"]
+       tags:
+         - { name: form.type, alias: entity_hidden }

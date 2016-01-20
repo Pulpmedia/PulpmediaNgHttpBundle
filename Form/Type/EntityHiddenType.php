@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Form\Type;
+namespace Pulpmedia\NgHttpBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\FormBuilderInterface;

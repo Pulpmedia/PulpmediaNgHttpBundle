@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Form\DataTransformer;
+namespace Pulpmedia\NgHttpBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

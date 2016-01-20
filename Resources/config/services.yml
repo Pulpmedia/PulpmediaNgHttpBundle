@@ -2,6 +2,8 @@ services:
    pulpmedia_ng_http.response.factory:
        class: Pulpmedia\NgHttpBundle\Services\ResponseFactory
        arguments: ["@jms_serializer"]
+   pulpmedia_ng_http.form.errors_serializer:
+       class: Pulpmedia\NgHttpBundle\Services\FormErrorsSerializer
    pulpmedia_ng_http.form.type.entity_hidden:
        class: Pulpmedia\NgHttpBundle\Form\Type\EntityHiddenType
        arguments: ["@doctrine.orm.entity_manager"]

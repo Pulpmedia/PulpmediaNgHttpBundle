@@ -9,3 +9,8 @@ services:
        arguments: ["@doctrine.orm.entity_manager"]
        tags:
          - { name: form.type, alias: entity_hidden }
+   pulpmedia_ng_http.authentication_handler:
+       class:  Pulpmedia\NgHttpBundle\Handler\AuthenticationHandler
+       arguments:  ["@pulpmedia_ng_http.response.factory"]
+       tags:
+         - { name: 'monolog.logger', channel: 'security' }

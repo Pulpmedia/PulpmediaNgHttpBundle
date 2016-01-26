@@ -18,6 +18,7 @@ class BaseResponse extends Response{
     private $groups = array();
     protected $version = 0;
     protected $contentData;
+    private $serializeNull = false;
 
     public function __construct(Serializer $serializer){
         $this->serializer = $serializer;
@@ -27,6 +28,10 @@ class BaseResponse extends Response{
 
     public function setExclusionStrategy($strategy){
         $this->exclusionStrategy = $strategy;
+        $this->setSerializedContent();
+    }
+    public function setSerializeNull($serializeNull){
+        $this->serializeNull = $serializeNull;
         $this->setSerializedContent();
     }
 
@@ -49,14 +54,18 @@ class BaseResponse extends Response{
         parent::setContent($this->serializeContent($this->contentData));
     }
     private function serializeContent($content){
-        $serializedContent = "";
+
         if($this->exclusionStrategy == self::EXCLUSION_GROUP){
-            $serializedContent = $this->serializer->serialize($content,'json',SerializationContext::create()->setGroups($this->groups));
+            $context = SerializationContext::create()->setGroups($this->groups)
         } elseif($this->exclusionStrategy == self::EXCLUSION_VERSION){
-            $serializedContent = $this->serializer->serialize($content,'json',SerializationContext::create()->setVersion($this->version));
+            $context = SerializationContext::create()->setVersion($this->version);
         } else{
-            $serializedContent = $this->serializer->serialize($content,'json');
+            $context = SerializationContext::create();
         }
+
+        $context->setSerializeNull($this->serializeNull);
+        $serializedContent = $this->serializer->serialize($content,'json',$context);
+
         return $serializedContent;
     }
 }

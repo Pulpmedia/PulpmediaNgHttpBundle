@@ -2,12 +2,12 @@
 
 namespace Pulpmedia\NgHttpBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Pulpmedia\NgHttpBundle\HttpFoundation\ErrorResponse;
 use Pulpmedia\NgHttpBundle\HttpFoundation\SuccessResponse;
 
-class Controller extends Controller
+class Controller extends BaseController
 {
     public function success($data, $headers = array(), $status = 200){
         $response = $this->get('pulpmedia_ng_http.response.factory')->getSuccessResponse();

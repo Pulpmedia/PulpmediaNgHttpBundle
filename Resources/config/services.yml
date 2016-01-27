@@ -19,3 +19,8 @@ services:
        arguments:  ["@pulpmedia_ng_http.response.factory"]
        tags:
          - { name: kernel.event_listener, event: kernel.exception }
+   pulpmedia_ng_http.accessdenied_handler:
+       class:  Pulpmedia\NgHttpBundle\Handler\AccessDeniedHandler
+       arguments:  ["@pulpmedia_ng_http.response.factory"]
+       tags:
+         - { name: 'monolog.logger', channel: 'security' }

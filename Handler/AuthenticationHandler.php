@@ -10,16 +10,33 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 use Pulpmedia\NgHttpBundle\Services\ResponseFactory;
 
-class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
+class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface, AuthenticationEntryPointInterface
 {
 
     private $rf;
     public function __construct(ResponseFactory $rf){
         $this->rf = $rf;
+    }
+
+
+    /**
+     * start function.
+     * 
+     * @access public
+     * @param Request $request
+     * @param AuthenticationException $authException
+     * @return Response the response to return
+     */
+    public function start(Request $request, AuthenticationException $authException = null ) {
+
+          $response = $this->rf->getErrorResponse();
+          $response->setErrors(array('message' => $authException->getMessage()));
+          return $response;  
     }
 
     /**

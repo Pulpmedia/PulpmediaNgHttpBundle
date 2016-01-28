@@ -19,7 +19,7 @@ use Pulpmedia\NgHttpBundle\Services\ResponseFactory;
 class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface, AuthenticationEntryPointInterface, LogoutSuccessHandlerInterface
 {
 
-    private $rf;
+    protected $rf;
     public function __construct(ResponseFactory $rf){
         $this->rf = $rf;
     }

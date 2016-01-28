@@ -55,7 +55,7 @@ class BaseResponse extends Response{
     }
     private function serializeContent($content){
 
-        if($this->exclusionStrategy == self::EXCLUSION_GROUP){
+        if($this->exclusionStrategy == self::EXCLUSION_GROUP && !empty($this->groups)){
             $context = SerializationContext::create()->setGroups($this->groups);
         } elseif($this->exclusionStrategy == self::EXCLUSION_VERSION){
             $context = SerializationContext::create()->setVersion($this->version);

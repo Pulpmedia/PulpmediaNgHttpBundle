@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 use Pulpmedia\NgHttpBundle\Services\ResponseFactory;
 
-class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface, AuthenticationEntryPointInterface
+class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface, AuthenticationEntryPointInterface, LogoutSuccessHandlerInterface
 {
 
     private $rf;
@@ -70,7 +71,16 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     {
 
             $response = $this->rf->getErrorResponse();
+            $response->setStatusCode(Response::HTTP_UNAUTHORIZED);
             $response->setErrors(array('message' => $exception->getMessage()));
             return $response;
+    }
+
+    public function onLogoutSuccess(Request $request) 
+    {
+        $result = array('success' => true);
+        $response = $this->rf->getSuccessResponse();
+        $response->setContent($result);
+        return $response;
     }
 }

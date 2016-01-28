@@ -14,3 +14,18 @@ services:
        arguments:  ["@pulpmedia_ng_http.response.factory"]
        tags:
          - { name: 'monolog.logger', channel: 'security' }
+   pulpmedia_ng_http.authentication_handler_userreturn:
+       class:  Pulpmedia\NgHttpBundle\Handler\AuthenticationHandlerUserReturn
+       arguments:  ["@pulpmedia_ng_http.response.factory"]
+       tags:
+         - { name: 'monolog.logger', channel: 'security' }
+   pulpmedia_ng_http.exception_listener:
+       class:  Pulpmedia\NgHttpBundle\EventListener\ExceptionListener
+       arguments:  ["@pulpmedia_ng_http.response.factory"]
+       tags:
+         - { name: kernel.event_listener, event: kernel.exception }
+   pulpmedia_ng_http.accessdenied_handler:
+       class:  Pulpmedia\NgHttpBundle\Handler\AccessDeniedHandler
+       arguments:  ["@pulpmedia_ng_http.response.factory"]
+       tags:
+         - { name: 'monolog.logger', channel: 'security' }

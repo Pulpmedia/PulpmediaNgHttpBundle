@@ -10,16 +10,34 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 use Pulpmedia\NgHttpBundle\Services\ResponseFactory;
 
-class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
+class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface, AuthenticationEntryPointInterface, LogoutSuccessHandlerInterface
 {
 
-    private $rf;
+    protected $rf;
     public function __construct(ResponseFactory $rf){
         $this->rf = $rf;
+    }
+
+
+    /**
+     * start function.
+     * 
+     * @access public
+     * @param Request $request
+     * @param AuthenticationException $authException
+     * @return Response the response to return
+     */
+    public function start(Request $request, AuthenticationException $authException = null ) {
+
+          $response = $this->rf->getErrorResponse();
+          $response->setErrors(array('message' => $authException->getMessage()));
+          return $response;  
     }
 
     /**
@@ -53,8 +71,17 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     {
 
             $response = $this->rf->getErrorResponse();
+            $response->setStatusCode(Response::HTTP_UNAUTHORIZED);
             $response->setErrors(array('message' => $exception->getMessage()));
             $response->setStatusCode(400);
             return $response;
+    }
+
+    public function onLogoutSuccess(Request $request) 
+    {
+        $result = array('success' => true);
+        $response = $this->rf->getSuccessResponse();
+        $response->setContent($result);
+        return $response;
     }
 }

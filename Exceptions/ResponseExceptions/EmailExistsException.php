@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EmailExistsException extends ResponseException
 {
-  const MESSAGE = 'Email already exists.';
+  const MESSAGE = 'Email already exist.';
   
   const ERROR_CODE = Response::HTTP_UNPROCESSABLE_ENTITY;
     

@@ -73,6 +73,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             $response = $this->rf->getErrorResponse();
             $response->setStatusCode(Response::HTTP_UNAUTHORIZED);
             $response->setErrors(array('message' => $exception->getMessage()));
+            $response->setStatusCode(400);
             return $response;
     }
 

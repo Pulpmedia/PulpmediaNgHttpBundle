@@ -1,7 +1,7 @@
 <?php
 namespace Pulpmedia\NgHttpBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
-use AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Pulpmedia\NgHttpBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\Common\Persistence\ObjectManager;
